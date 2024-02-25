@@ -9,6 +9,7 @@ import ssl
 import json
 import time
 import uuid
+import sys
 from loguru import logger
 from websockets_proxy import Proxy, proxy_connect
 
@@ -78,11 +79,11 @@ async def main():
     print('代理',proxy)
    
     # TODO 修改代理列表
-    socks5_proxy_list = [
-        proxy
-    ]
-    tasks = [asyncio.ensure_future(connect_to_wss(i, _user_id)) for i in socks5_proxy_list]
-    await asyncio.gather(*tasks)
+    # socks5_proxy_list = [
+    #     proxy
+    # ]
+    # tasks = [asyncio.ensure_future(connect_to_wss(i, _user_id)) for i in socks5_proxy_list]
+    # await asyncio.gather(*tasks)
 
 
 if __name__ == '__main__':
