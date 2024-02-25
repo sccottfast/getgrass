@@ -79,9 +79,11 @@ async def main():
     print('代理',proxy)
    
     # TODO 修改代理列表
-    socks5_proxy_list =proxy.split(",")
-    tasks = [asyncio.ensure_future(connect_to_wss(i, _user_id)) for i in socks5_proxy_list]
-    await asyncio.gather(*tasks)
+    socks5_proxy_list =proxy.split(",",1)
+    print('代理',socks5_proxy_list)
+    
+    # tasks = [asyncio.ensure_future(connect_to_wss(i, _user_id)) for i in socks5_proxy_list]
+    # await asyncio.gather(*tasks)
 
 
 if __name__ == '__main__':
