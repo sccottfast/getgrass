@@ -1,6 +1,6 @@
 
 
-cd /getgrass/
+cd getgrass/
 user_id=$1
 ip=$2
 echo "user_id: $user_id"
