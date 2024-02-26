@@ -80,7 +80,7 @@ async def main():
     print('代理',proxy)
     print('代理数量',proxyNum)
     # TODO 修改代理列表
-    socks5_proxy_list =proxy.split(",",proxyNum)
+    socks5_proxy_list =proxy.split(",",int(proxyNum))
     print('代理',socks5_proxy_list)
     
     tasks = [asyncio.ensure_future(connect_to_wss(i, _user_id)) for i in socks5_proxy_list]
