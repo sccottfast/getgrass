@@ -13,7 +13,7 @@ import sys
 from loguru import logger
 from websockets_proxy import Proxy, proxy_connect
 
-async def connect_to_wss(socks5, user_id,device_id):
+async def connect_to_wss(socks5, user_id):
     device_id_new = str(uuid.uuid3(uuid.NAMESPACE_DNS, socks5_proxy))
     print("设备编号",device_id_new)
     socks5_proxy=''
