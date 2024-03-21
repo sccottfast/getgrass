@@ -13,12 +13,20 @@ import sys
 from loguru import logger
 from websockets_proxy import Proxy, proxy_connect
 
-async def connect_to_wss(socks5_proxy, user_id,device_id):
-    if len(device_id)==0:
-       print('没有设备id重新生成') 
-       device_id = str(uuid.uuid3(uuid.NAMESPACE_DNS, socks5_proxy))
-    logger.info(device_id)
-
+async def connect_to_wss(socks5, user_id,device_id):
+    device_id_new = str(uuid.uuid3(uuid.NAMESPACE_DNS, socks5_proxy))
+    print("设备编号",device_id_new)
+    socks5_proxy=''
+    device_id=''
+    if socks5 in '$':
+      socks5_proxy_array =socks5.split(",",2)
+      socks5_proxy=socks5_proxy_array[0]
+      device_id=socks5_proxy_array[1]
+    else:
+      socks5_proxy=socks5
+      device_id = str(uuid.uuid3(uuid.NAMESPACE_DNS, socks5_proxy))
+    print(device_id)
+    print(socks5_proxy)
 
 async def main():
     _user_id = sys.argv[1]
@@ -30,7 +38,7 @@ async def main():
     # TODO 修改代理列表
     socks5_proxy_list =proxy.split(",",int(proxyNum))
     print('代理',socks5_proxy_list)
-    tasks = [asyncio.ensure_future(connect_to_wss(i.split("$",2)[0], _user_id,i.split("$")[1])) for i in socks5_proxy_list]
+    tasks = [asyncio.ensure_future(connect_to_wss(i, _user_id)) for i in socks5_proxy_list]
     await asyncio.gather(*tasks)
 
 
