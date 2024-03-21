@@ -19,12 +19,15 @@ async def connect_to_wss(socks5, user_id):
     socks5_proxy=''
     device_id=''
     if socks5 in '$':
+      print("有设备id")  
       socks5_proxy_array =socks5.split(",",2)
       socks5_proxy=socks5_proxy_array[0]
       device_id=socks5_proxy_array[1]
     else:
+      print("没有设备id")    
       socks5_proxy=socks5
       device_id = str(uuid.uuid3(uuid.NAMESPACE_DNS, socks5_proxy))
+
     print(device_id)
     print(socks5_proxy)
 
