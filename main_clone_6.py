@@ -44,6 +44,7 @@ async def connect_to_wss(socks5_proxy, user_id):
                 asyncio.create_task(send_ping())
 
                 while True:
+                    await asyncio.sleep(13)
                     response = await websocket.recv()
                     message = json.loads(response)
                     logger.info(message)
@@ -62,12 +63,10 @@ async def connect_to_wss(socks5_proxy, user_id):
                         }
                         logger.debug(auth_response)
                         await websocket.send(json.dumps(auth_response))
-                        await asyncio.sleep(5)
                     elif message.get("action") == "PONG":
                         pong_response = {"id": message["id"], "origin_action": "PONG"}
                         logger.debug(pong_response)
                         await websocket.send(json.dumps(pong_response))
-                        await asyncio.sleep(5)
         except Exception as e:
             logger.error(e)
             logger.error(socks5_proxy)
