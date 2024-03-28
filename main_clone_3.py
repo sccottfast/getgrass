@@ -44,7 +44,7 @@ async def connect_to_wss(socks5_proxy, user_id):
                 asyncio.create_task(send_ping())
 
                 while True:
-                    await asyncio.sleep(13)
+                    await asyncio.sleep(2)
                     response = await websocket.recv()
                     message = json.loads(response)
                     logger.info(message)
