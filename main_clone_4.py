@@ -19,7 +19,7 @@ async def connect_to_wss(socks5_proxy, user_id):
     logger.info(device_id)
     while True:
         try:
-            await asyncio.sleep(random.randint(1, 20) / 10)
+            await asyncio.sleep(random.randint(1, 10) / 10)
             custom_headers = {
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
             }
@@ -37,14 +37,13 @@ async def connect_to_wss(socks5_proxy, user_id):
                             {"id": str(uuid.uuid4()), "version": "1.0.0", "action": "PING", "data": {}})
                         logger.debug(send_message)
                         await websocket.send(send_message)
-                        await asyncio.sleep(30)
+                        await asyncio.sleep(20)
 
                 # asyncio.create_task(send_http_request_every_10_seconds(socks5_proxy, device_id))
                 await asyncio.sleep(1)
                 asyncio.create_task(send_ping())
 
                 while True:
-                    await asyncio.sleep(2)
                     response = await websocket.recv()
                     message = json.loads(response)
                     logger.info(message)
